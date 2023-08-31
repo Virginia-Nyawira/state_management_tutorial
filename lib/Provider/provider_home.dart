@@ -3,7 +3,9 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Item{}
+class Item{
+
+}
 
 class CartModel extends ChangeNotifier{
   // Internal, private state of the cart.
