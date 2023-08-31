@@ -20,6 +20,26 @@ class CartModel extends ChangeNotifier{
      _items.add(item);
      notifyListeners(); // This call tells the widgets that are listening to this model to rebuild.
    }
+//Removes all the items from the List
+   void removeAll(){
+     _items.clear();
+     notifyListeners();
+   }
 
+}
+class HomePageProvider extends StatefulWidget {
+  const HomePageProvider({super.key});
+
+  @override
+  State<HomePageProvider> createState() => _HomePageProviderState();
+}
+
+class _HomePageProviderState extends State<HomePageProvider> {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<CartModel>(
+        builder: (context,cart,child)=>Text('Total Price: ${cart.totalPrice}'),
+    );
+  }
 }
 
