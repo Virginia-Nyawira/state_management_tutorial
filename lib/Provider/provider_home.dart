@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Item{
+  late String itemName;
+  late int itemPrice;
+  late Image itemImage;
 
 }
-
 class CartModel extends ChangeNotifier{
   // Internal, private state of the cart.
   final List<Item> _items=[];
