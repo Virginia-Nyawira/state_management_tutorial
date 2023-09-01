@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:states/Provider/provider_home.dart';
+import 'package:states/Provider/Model/items_model.dart';
+import 'package:states/Provider/Views/home_view.dart';
+//import 'package:states/Provider/provider_home.dart';
 
 void main() {
   runApp(
-      ChangeNotifierProvider(
-          create: (context) => CartModel(),
+    //Entry point of provider
+      ChangeNotifierProvider<MovieProvider>(
+          create: (context) => MovieProvider(),//creating change notifier object
           child: const MyApp(),
       )
   );
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const HomePageProvider(),
+        home: const ProviderHomeView(),
     );
   }
 }
