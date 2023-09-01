@@ -10,6 +10,10 @@ class ProviderWithApi extends StatefulWidget {
 class _ProviderWithApiState extends State<ProviderWithApi> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("API and Provider with tutorial"),
+      ),
+    );
   }
 }
