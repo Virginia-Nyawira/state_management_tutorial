@@ -8,7 +8,6 @@ class CounterCubit extends Cubit<CounterState> {
 //Counter Cubit
 void increment ()=> emit(CounterState(initialValue: state.initialValue+1));
 
-  void decrement()  {
-    emit(CounterState(initialValue: state.initialValue-1));
-  }
+  void decrement()  => emit(CounterState(initialValue: state.initialValue-1));
+
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
+
+import 'package:states/Bloc/counter_cubit.dart';
 
 class CounterBloc {
   int _counter = 0;
@@ -17,6 +20,7 @@ class CounterBloc {
     _counterStreamController.close();
   }
 }
+
 class BlockHomeView extends StatefulWidget {
   const BlockHomeView({required Key key}) : super(key: key);
 
@@ -60,10 +64,38 @@ class _BlockHomeViewState extends State<BlockHomeView> {
               builder: (context, snapshot) {
                 return Text(
                   '${snapshot.data}',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
                 );
               },
             ),
+            Row(
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    BlocProvider.of<CounterCubit>(context).increment();
+                  },
+                  tooltip: 'Decrement',
+                  //Place the bloc builder only at the point where changes are occurring
+                  child: BlocBuilder<CounterCubit, CounterState>(
+                    builder: (context, state) {
+                      return Text(state.initialValue.toString());
+                    },
+                  ),
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    BlocProvider.of<CounterCubit>(context).decrement();
+                  },
+                  tooltip: 'Increment',
+                  child: BlocBuilder<CounterCubit, CounterState>(
+                    builder: (context, state) {
+                      return Text(state.initialValue.toString());
+                    },
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
