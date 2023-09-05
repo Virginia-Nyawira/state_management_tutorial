@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:states/Bloc/counter_cubit.dart';
 import 'package:states/Provider/API_Call_using_Provider/Services/provider_service.dart';
 import 'package:states/Provider/API_Call_using_Provider/home_view.dart';
 import 'package:states/Provider/Model/items_model.dart';
 import 'package:states/Provider/Views/home_view.dart';
 //import 'package:states/Provider/provider_home.dart';
+
+void main() {
+  runApp(
+      const MyApp()
+  );
+}
+
+
 /// Provider with no API
 // void main() {
 //   runApp(
@@ -17,15 +27,15 @@ import 'package:states/Provider/Views/home_view.dart';
 //}
 
 ///Provider with API
-void main() {
-  runApp(
-    //Entry point of provider
-      ChangeNotifierProvider(
-          create: (context) => ToDoProvider(),//creating change notifier object
-          child: const MyApp(),
-      )
-  );
-}
+// void main() {
+//   runApp(
+//     //Entry point of provider
+//       ChangeNotifierProvider(
+//           create: (context) => ToDoProvider(),//creating change notifier object
+//           child: const MyApp(),
+//       )
+//   );
+// }
 ///When you have many classes too manage
 // void main() {
 //   runApp(
@@ -45,16 +55,31 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    ///Bloc Provider entry point
+    return BlocProvider<CounterCubit>(
+      create: (context) => CounterCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'State management',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-      //  home: const ProviderHomeView(),
-      home: const ProviderWithApi(),
+        //  home: const ProviderHomeView(),
+        home: const ProviderWithApi(),
+      ),
     );
+
+    //   MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //     title: 'State management',
+    //     theme: ThemeData(
+    //       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    //       useMaterial3: true,
+    //     ),
+    //   //  home: const ProviderHomeView(),
+    //   home: const ProviderWithApi(),
+    // );
   }
 }
 
