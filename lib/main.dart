@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:states/Bloc/bloc_home.dart';
 import 'package:states/Bloc/counter_cubit.dart';
 import 'package:states/Provider/API_Call_using_Provider/Services/provider_service.dart';
 import 'package:states/Provider/API_Call_using_Provider/home_view.dart';
@@ -36,6 +37,7 @@ void main() {
 //       )
 //   );
 // }
+
 ///When you have many classes too manage
 // void main() {
 //   runApp(
@@ -66,7 +68,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         //  home: const ProviderHomeView(),
-        home: const ProviderWithApi(),
+        home:  const BlockHomeView(),
       ),
     );
 
