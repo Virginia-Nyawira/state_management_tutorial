@@ -102,10 +102,20 @@ class _BlockHomeViewState extends State<BlockHomeView> {
                 ),
                 BlocBuilder<CounterCubit, CounterState>(
                   builder: (context, state) {
-                    return Text(state.initialValue.toString(), style: const TextStyle(
-                      fontWeight: FontWeight.w900,fontSize: 16,
-                    ),);
-                  },
+                     if(state.initialValue<0){
+                       return Text("Negative ${state.initialValue}", style: const TextStyle(
+                         fontWeight: FontWeight.w900,fontSize: 16,
+                       ),);
+                     }else if(state.initialValue==10){
+                       return Text("Number ${state.initialValue}", style: const TextStyle(
+                         fontWeight: FontWeight.w900,fontSize: 16,
+                       ),);
+                     }else{
+                       return Text("Positive ${state.initialValue}", style: const TextStyle(
+                         fontWeight: FontWeight.w900,fontSize: 16,
+                       ),);
+                     }
+                  }
                 ),
                 // BlocBuilder<CounterCubit, CounterState>(
                 //   builder: (context, state) {
