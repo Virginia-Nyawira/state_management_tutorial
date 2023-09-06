@@ -125,7 +125,9 @@ class _SecondScreenState extends State<SecondScreen> {
                 // ),
               ],
             ),
-            MaterialButton(onPressed: (){
+            MaterialButton(
+              color: Colors.lime,
+              onPressed: (){
 
             },
               child: const Text("Go to the next page"),
