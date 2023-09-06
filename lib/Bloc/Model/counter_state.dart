@@ -1,4 +1,4 @@
-part of 'counter_cubit.dart';
+part of '../Service/counter_cubit.dart';
 
 
  class CounterState {

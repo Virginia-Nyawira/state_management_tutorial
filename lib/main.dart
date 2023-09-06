@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:states/Bloc/bloc_home.dart';
-import 'package:states/Bloc/counter_cubit.dart';
+import 'package:states/Bloc/Presentation/bloc_home.dart';
+import 'package:states/Bloc/Service/counter_cubit.dart';
 import 'package:states/Provider/API_Call_using_Provider/Services/provider_service.dart';
 import 'package:states/Provider/API_Call_using_Provider/home_view.dart';
 import 'package:states/Provider/Model/items_model.dart';
@@ -68,7 +68,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         //  home: const ProviderHomeView(),
-        home:  const BlockHomeView(),
+        home:  const BlockHomeView(
+          color: Colors.blueAccent,
+        ),
       ),
     );
 
