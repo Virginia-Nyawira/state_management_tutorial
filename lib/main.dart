@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:states/Bloc/Presentation/Routing/router.dart';
 import 'package:states/Bloc/Presentation/bloc_home.dart';
+import 'package:states/Bloc/Presentation/second_screen.dart';
 import 'package:states/Bloc/Service/counter_cubit.dart';
 import 'package:states/Provider/API_Call_using_Provider/Services/provider_service.dart';
 import 'package:states/Provider/API_Call_using_Provider/home_view.dart';
@@ -51,9 +53,16 @@ void main() {
 //   );
 // }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final CounterCubit _counterCubit= CounterCubit();
+  final AppRouter _appRouter=AppRouter();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -68,22 +77,35 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         //  home: const ProviderHomeView(),
-        home:  const BlockHomeView(
-          color: Colors.blueAccent,
-        ),
+        // home:  const BlockHomeView(
+        //   color: Colors.blueAccent,
+        // ),
+        ///Named Routes
+        // routes: {
+        //   '/': (context)=> BlocProvider.value(
+        //     value: _counterCubit ,
+        //     child: const BlockHomeView(
+        //       color: Colors.blueAccent,
+        //     ),
+        //   ),
+        //   '/secondScreen' : (context)=> BlocProvider.value(
+        //     value: _counterCubit ,
+        //     child: const SecondScreen(
+        //       color: Colors.blueAccent,
+        //     ),
+        //   ),
+        // },
+        ///Generated Routes
+        onGenerateRoute: _appRouter.generateThisRoute,
       ),
     );
-
-    //   MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //     title: 'State management',
-    //     theme: ThemeData(
-    //       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-    //       useMaterial3: true,
-    //     ),
-    //   //  home: const ProviderHomeView(),
-    //   home: const ProviderWithApi(),
-    // );
+  }
+  @override
+  void dispose() {
+    //_counterCubit.close();
+    _appRouter.dispose();
+    // TODO: implement dispose
+    super.dispose();
   }
 }
 

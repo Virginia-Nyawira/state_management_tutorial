@@ -80,6 +80,7 @@ class _BlockHomeViewState extends State<BlockHomeView> {
                       BlocProvider.of<CounterCubit>(context).decrement();
                     },
                     tooltip: 'Decrement',
+                    heroTag: 'decrementButton',
                     //Place the bloc builder only at the point where changes are occurring
                     child: const Icon(Icons.remove),
                   ),
@@ -88,6 +89,7 @@ class _BlockHomeViewState extends State<BlockHomeView> {
                         BlocProvider.of<CounterCubit>(context).increment();
                       },
                       tooltip: 'Increment',
+                      heroTag: 'incrementButton',
                       child: const Icon(Icons.add)),
                 ],
               ),
@@ -159,13 +161,15 @@ class _BlockHomeViewState extends State<BlockHomeView> {
             MaterialButton(
               color: Colors.pink[400],
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => BlocProvider.value(
-                      value: CounterCubit(),
-                      child: const SecondScreen(
-                            color: Colors.lime,
-                          ),
-                    )));
+                Navigator.of(context).pushNamed('/secondScreen');
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (newContext) => BlocProvider.value(
+                //       value: BlocProvider.of<CounterCubit>(context),
+                //       //value: CounterCubit(),
+                //       child: const SecondScreen(
+                //             color: Colors.lime,
+                //           ),
+                //     )));
               },
               child: const Text("Go to the next page"),
             )

@@ -53,6 +53,7 @@ class _SecondScreenState extends State<SecondScreen> {
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).decrement();
                     },
+                    heroTag: 'decrementButton',
                     tooltip: 'Decrement',
                     //Place the bloc builder only at the point where changes are occurring
                     child: const Icon(Icons.remove),
@@ -61,6 +62,7 @@ class _SecondScreenState extends State<SecondScreen> {
                       onPressed: () {
                         BlocProvider.of<CounterCubit>(context).increment();
                       },
+                      heroTag: 'incrementButton',
                       tooltip: 'Increment',
                       child: const Icon(Icons.add)
                   ),
