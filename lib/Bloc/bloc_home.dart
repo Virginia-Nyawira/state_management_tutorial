@@ -49,82 +49,99 @@ class _BlockHomeViewState extends State<BlockHomeView> {
           ),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Counter Value:',
-              style: TextStyle(fontSize: 20),
-            ),
-            const SizedBox(height: 10),
-            // StreamBuilder<int>(
-            //   stream: _counterBloc.counterStream,
-            //   initialData: 0,
-            //   builder: (context, snapshot) {
-            //     return Text(
-            //       '${snapshot.data}',
-            //       style: const TextStyle(
-            //           fontSize: 24, fontWeight: FontWeight.bold),
-            //     );
-            //   },
-            // ),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-
-                  FloatingActionButton(
-                    onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).decrement();
-                    },
-                    tooltip: 'Decrement',
-                    //Place the bloc builder only at the point where changes are occurring
-                    child: const Icon(Icons.remove),
-                  ),
-                  FloatingActionButton.large(
-                    onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).increment();
-                    },
-                    tooltip: 'Increment',
-                    child: const Icon(Icons.add)
-                  ),
-                ],
+      body: BlocListener<CounterCubit, CounterState>(
+        listener: (context, state) {
+          // TODO: implement listener}
+          if(state.isIncremented==true){
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Incremented"))
+            );
+          } else if (state.isIncremented==false){
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Decremented"))
+            );
+          }
+        },
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Counter Value:',
+                style: TextStyle(fontSize: 20),
               ),
-            ),
-            const SizedBox(height: 10,),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 150,
+              const SizedBox(height: 10),
+              // StreamBuilder<int>(
+              //   stream: _counterBloc.counterStream,
+              //   initialData: 0,
+              //   builder: (context, snapshot) {
+              //     return Text(
+              //       '${snapshot.data}',
+              //       style: const TextStyle(
+              //           fontSize: 24, fontWeight: FontWeight.bold),
+              //     );
+              //   },
+              // ),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    FloatingActionButton(
+                      onPressed: () {
+                        BlocProvider.of<CounterCubit>(context).decrement();
+                      },
+                      tooltip: 'Decrement',
+                      //Place the bloc builder only at the point where changes are occurring
+                      child: const Icon(Icons.remove),
+                    ),
+                    FloatingActionButton.large(
+                        onPressed: () {
+                          BlocProvider.of<CounterCubit>(context).increment();
+                        },
+                        tooltip: 'Increment',
+                        child: const Icon(Icons.add)
+                    ),
+                  ],
                 ),
-                BlocBuilder<CounterCubit, CounterState>(
-                  builder: (context, state) {
-                     if(state.initialValue<0){
-                       return Text("Negative ${state.initialValue}", style: const TextStyle(
-                         fontWeight: FontWeight.w900,fontSize: 16,
-                       ),);
-                     }else if(state.initialValue==10){
-                       return Text("Number ${state.initialValue}", style: const TextStyle(
-                         fontWeight: FontWeight.w900,fontSize: 16,
-                       ),);
-                     }else{
-                       return Text("Positive ${state.initialValue}", style: const TextStyle(
-                         fontWeight: FontWeight.w900,fontSize: 16,
-                       ),);
-                     }
-                  }
-                ),
-                // BlocBuilder<CounterCubit, CounterState>(
-                //   builder: (context, state) {
-                //     return Text(state.initialValue.toString());
-                //   },
-                // ),
-              ],
-            )
-          ],
+              ),
+              const SizedBox(height: 10,),
+              Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    width: 150,
+                  ),
+                  BlocBuilder<CounterCubit, CounterState>(
+                      builder: (context, state) {
+                        if (state.initialValue < 0) {
+                          return Text("Negative ${state.initialValue}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w900, fontSize: 16,
+                            ),);
+                        } else if (state.initialValue == 10) {
+                          return Text("Number ${state.initialValue}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w900, fontSize: 16,
+                            ),);
+                        } else {
+                          return Text("Positive ${state.initialValue}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w900, fontSize: 16,
+                            ),);
+                        }
+                      }
+                  ),
+                  // BlocBuilder<CounterCubit, CounterState>(
+                  //   builder: (context, state) {
+                  //     return Text(state.initialValue.toString());
+                  //   },
+                  // ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
       // floatingActionButton: FloatingActionButton(
