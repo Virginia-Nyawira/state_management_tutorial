@@ -13,23 +13,23 @@ import 'package:states/Provider/Model/items_model.dart';
 import 'package:states/Provider/Views/home_view.dart';
 //import 'package:states/Provider/provider_home.dart';
 
-void main() {
-  runApp(
-      const MyApp()
-  );
-}
+// void main() {
+//   runApp(
+//       const MyApp()
+//   );
+// }
 
 
 /// Provider with no API
-// void main() {
-//   runApp(
-//     //Entry point of provider
-//       ChangeNotifierProvider<MovieProvider>(
-//           create: (context) => MovieProvider(),//creating change notifier object
-//           child: const MyApp(),
-//       )
-//   );
-//}
+void main() {
+  runApp(
+    //Entry point of provider
+      ChangeNotifierProvider<MovieProvider>(
+          create: (context) => MovieProvider(),//creating change notifier object
+          child: const MyApp(),
+      )
+  );
+}
 
 ///Provider with API
 // void main() {
@@ -55,44 +55,44 @@ void main() {
 //   );
 // }
 
-class MyApp extends StatefulWidget {
-  // final Connectivity connectivity;
-  // final AppRouter appRouter;
-
-  const MyApp({super.key,
-  });
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  //final CounterCubit _counterCubit= CounterCubit();
-  final AppRouter _appRouter=AppRouter();
-  late Connectivity connectivity;
-  //late AppRouter appRouter;
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    ///Bloc Provider entry point
-    return MultiBlocProvider(providers:
-    [
-      BlocProvider<InternetCubit>(create:(context)=>
-      InternetCubit(connectivity: connectivity),
-      ),
-      BlocProvider<CounterCubit>(
-          create: (context)=>CounterCubit(internetCubit: context.read<InternetCubit>())),
-      //Try .watch
-    ],
-
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'State management',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
+// class MyApp extends StatefulWidget {
+//   // final Connectivity connectivity;
+//   // final AppRouter appRouter;
+//
+//   const MyApp({super.key,
+//   });
+//
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
+//
+// class _MyAppState extends State<MyApp> {
+//   //final CounterCubit _counterCubit= CounterCubit();
+//   final AppRouter _appRouter=AppRouter();
+//   late Connectivity connectivity;
+//   //late AppRouter appRouter;
+//
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     ///Bloc Provider entry point
+//     return MultiBlocProvider(providers:
+//     [
+//       BlocProvider<InternetCubit>(create:(context)=>
+//       InternetCubit(connectivity: connectivity),
+//       ),
+//       BlocProvider<CounterCubit>(
+//           create: (context)=>CounterCubit(internetCubit: context.read<InternetCubit>())),
+//       //Try .watch
+//     ],
+//
+//         child: MaterialApp(
+//           debugShowCheckedModeBanner: false,
+//           title: 'State management',
+//           theme: ThemeData(
+//             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+//             useMaterial3: true,
+//           ),
           //  home: const ProviderHomeView(),
           // home:  const BlockHomeView(
           //   color: Colors.blueAccent,
@@ -113,17 +113,33 @@ class _MyAppState extends State<MyApp> {
           //   ),
           // },
           ///Generated Routes
-          onGenerateRoute: _appRouter.generateThisRoute,
-        ),
-    );
+          // onGenerateRoute: _appRouter.generateThisRoute,
+//         ),
+//     );
+//
+//   }
+//   @override
+//   void dispose() {
+//     //_counterCubit.close();
+//     _appRouter.dispose();
+//     // TODO: implement dispose
+//     super.dispose();
+//   }
+// }
 
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
-  void dispose() {
-    //_counterCubit.close();
-    _appRouter.dispose();
-    // TODO: implement dispose
-    super.dispose();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+          title: 'State management',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+       home: const ProviderHomeView_Movie(),
+    );
   }
 }
-

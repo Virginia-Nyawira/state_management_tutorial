@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:states/Provider/Model/items_model.dart';
 import 'package:states/Provider/Views/favourite_item.dart';
 
-class ProviderHomeView extends StatefulWidget {
-  const ProviderHomeView({super.key});
+class ProviderHomeView_Movie extends StatefulWidget {
+  const ProviderHomeView_Movie({super.key});
 
   @override
-  State<ProviderHomeView> createState() => _ProviderHomeViewState();
+  State<ProviderHomeView_Movie> createState() => _ProviderHomeView_MovieState();
 }
 
-class _ProviderHomeViewState extends State<ProviderHomeView> {
+class _ProviderHomeView_MovieState extends State<ProviderHomeView_Movie> {
   @override
   Widget build(BuildContext context) {
     //  For displaying all the movie list
