@@ -30,9 +30,16 @@ class InternetCubit extends Cubit<InternetState> {
         });
 
   }
+  //Methods to emit created internet states
 
   void emitInternetConnected(ConnectivityType _connectivityType) =>
       emit(InternetConnected(connectivityType: _connectivityType));
 
   void emitInternetDisconnected()=> emit(InternetDisconnected());
+
+  @override
+  Future<void> close(){
+    connectivityStreamSubscription.cancel();
+    return super.close();
+  }
 }

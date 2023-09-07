@@ -15,13 +15,13 @@ class AppRouter {
                 value: _counterCubit,
                 child: const BlockHomeView(color: Colors.white)));
 
-        break;
+
       case '/secondScreen':
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
                 value: _counterCubit,
                 child: const SecondScreen(color: Colors.white)));
-        break;
+
       default:
         return null;
     }
