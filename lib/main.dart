@@ -1,8 +1,10 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:states/Bloc/Presentation/Routing/router.dart';
 import 'package:states/Bloc/Presentation/bloc_home.dart';
+import 'package:states/Bloc/Presentation/internet_cubit.dart';
 import 'package:states/Bloc/Presentation/second_screen.dart';
 import 'package:states/Bloc/Service/counter_cubit.dart';
 import 'package:states/Provider/API_Call_using_Provider/Services/provider_service.dart';
@@ -54,51 +56,67 @@ void main() {
 // }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  // final Connectivity connectivity;
+  // final AppRouter appRouter;
+
+  const MyApp({super.key,
+  });
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  final CounterCubit _counterCubit= CounterCubit();
+  //final CounterCubit _counterCubit= CounterCubit();
   final AppRouter _appRouter=AppRouter();
+  late Connectivity connectivity;
+  //late AppRouter appRouter;
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     ///Bloc Provider entry point
-    return BlocProvider<CounterCubit>(
-      create: (context) => CounterCubit(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'State management',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        //  home: const ProviderHomeView(),
-        // home:  const BlockHomeView(
-        //   color: Colors.blueAccent,
-        // ),
-        ///Named Routes
-        // routes: {
-        //   '/': (context)=> BlocProvider.value(
-        //     value: _counterCubit ,
-        //     child: const BlockHomeView(
-        //       color: Colors.blueAccent,
-        //     ),
-        //   ),
-        //   '/secondScreen' : (context)=> BlocProvider.value(
-        //     value: _counterCubit ,
-        //     child: const SecondScreen(
-        //       color: Colors.blueAccent,
-        //     ),
-        //   ),
-        // },
-        ///Generated Routes
-        onGenerateRoute: _appRouter.generateThisRoute,
+    return MultiBlocProvider(providers:
+    [
+      BlocProvider<InternetCubit>(create:(context)=>
+      InternetCubit(connectivity: connectivity),
       ),
+      BlocProvider<CounterCubit>(
+          create: (context)=>CounterCubit(internetCubit: context.read<InternetCubit>())),
+      //Try .watch
+    ],
+
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'State management',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          //  home: const ProviderHomeView(),
+          // home:  const BlockHomeView(
+          //   color: Colors.blueAccent,
+          // ),
+          ///Named Routes
+          // routes: {
+          //   '/': (context)=> BlocProvider.value(
+          //     value: _counterCubit ,
+          //     child: const BlockHomeView(
+          //       color: Colors.blueAccent,
+          //     ),
+          //   ),
+          //   '/secondScreen' : (context)=> BlocProvider.value(
+          //     value: _counterCubit ,
+          //     child: const SecondScreen(
+          //       color: Colors.blueAccent,
+          //     ),
+          //   ),
+          // },
+          ///Generated Routes
+          onGenerateRoute: _appRouter.generateThisRoute,
+        ),
     );
+
   }
   @override
   void dispose() {

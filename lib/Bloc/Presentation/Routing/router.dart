@@ -5,7 +5,10 @@ import 'package:states/Bloc/Presentation/second_screen.dart';
 import 'package:states/Bloc/Service/counter_cubit.dart';
 
 class AppRouter {
-  final CounterCubit _counterCubit = CounterCubit();
+  ///It is definately going to give you errors!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  final CounterCubit _counterCubit= CounterCubit(internetCubit: internetCubit);
+
+  static get internetCubit => null;
 
   Route? generateThisRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {

@@ -14,21 +14,24 @@ class InternetCubit extends Cubit<InternetState> {
   late StreamSubscription connectivityStreamSubscription;
 
   InternetCubit({required this.connectivity}) : super(InternetLoading()) {
+    monitorInternetConnection();
 
-    connectivityStreamSubscription =
-        connectivity.onConnectivityChanged.listen((connectivityResult) {
-          if(connectivityResult==ConnectivityResult.wifi){
-            emitInternetConnected(ConnectivityType.wifi);
-          }
-          else if(connectivityResult==ConnectivityResult.mobile){
-            emitInternetConnected(ConnectivityType.mobile);
-          }
-          else if(connectivityResult==ConnectivityResult.none){
-            emitInternetDisconnected();
-          }
+  }
 
-        });
+  StreamSubscription<ConnectivityResult> monitorInternetConnection() {
+    return connectivityStreamSubscription =
+      connectivity.onConnectivityChanged.listen((connectivityResult) {
+        if(connectivityResult==ConnectivityResult.wifi){
+          emitInternetConnected(ConnectivityType.wifi);
+        }
+        else if(connectivityResult==ConnectivityResult.mobile){
+          emitInternetConnected(ConnectivityType.mobile);
+        }
+        else if(connectivityResult==ConnectivityResult.none){
+          emitInternetDisconnected();
+        }
 
+      });
   }
   //Methods to emit created internet states
 

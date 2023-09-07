@@ -1,26 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:states/Bloc/Presentation/internet_cubit.dart';
 import 'package:states/Bloc/Presentation/second_screen.dart';
 import 'dart:async';
 
 import 'package:states/Bloc/Service/counter_cubit.dart';
-
-// class CounterBloc {
-//   int _counter = 0;
-//   final _counterStreamController = StreamController<int>();
-//
-//   Stream<int> get counterStream => _counterStreamController.stream;
-//
-//   void incrementCounter() {
-//     _counter++;
-//     _counterStreamController.sink.add(_counter);
-//   }
-//
-//   void dispose() {
-//     _counterStreamController.close();
-//   }
-// }
+import 'package:states/constants.dart';
 
 class BlockHomeView extends StatefulWidget {
   const BlockHomeView({Key? key, required this.color}) : super(key: key);
@@ -55,6 +41,26 @@ class _BlockHomeViewState extends State<BlockHomeView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            BlocBuilder<InternetCubit, InternetState>(
+                builder: (context, state){
+                  if(state is InternetConnected &&
+                  state.connectivityType==ConnectivityType.wifi
+                  ){
+                    return const Text('Wifi');
+                  }else if(
+                  state is InternetConnected &&
+                      state.connectivityType==ConnectivityType.mobile
+                  ){
+                    return const Text('Mobile');
+                  }
+                  else if(
+                  state is InternetConnected
+                  ){
+                    return const Text('Disconnected');
+                  }
+                  return const CircularProgressIndicator();
+                },
+            ),
             const Text(
               'Counter Value:',
               style: TextStyle(fontSize: 20),
@@ -71,29 +77,31 @@ class _BlockHomeViewState extends State<BlockHomeView> {
             //     );
             //   },
             // ),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  FloatingActionButton(
-                    onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).decrement();
-                    },
-                    tooltip: 'Decrement',
-                    heroTag: 'decrementButton',
-                    //Place the bloc builder only at the point where changes are occurring
-                    child: const Icon(Icons.remove),
-                  ),
-                  FloatingActionButton.large(
-                      onPressed: () {
-                        BlocProvider.of<CounterCubit>(context).increment();
-                      },
-                      tooltip: 'Increment',
-                      heroTag: 'incrementButton',
-                      child: const Icon(Icons.add)),
-                ],
-              ),
-            ),
+            ///       + and - buttons
+            // Center(
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       FloatingActionButton(
+            //         onPressed: () {
+            //           BlocProvider.of<CounterCubit>(context).decrement();
+            //         },
+            //         tooltip: 'Decrement',
+            //         heroTag: 'decrementButton',
+            //         //Place the bloc builder only at the point where changes are occurring
+            //         child: const Icon(Icons.remove),
+            //       ),
+            //       FloatingActionButton.large(
+            //           onPressed: () {
+            //             BlocProvider.of<CounterCubit>(context).increment();
+            //           },
+            //           tooltip: 'Increment',
+            //           heroTag: 'incrementButton',
+            //           child: const Icon(Icons.add)),
+            //     ],
+            //   ),
+            // ),
+            ///**************************************************************************
             const SizedBox(
               height: 10,
             ),
