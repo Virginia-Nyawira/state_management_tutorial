@@ -49,7 +49,7 @@ class _SecondScreenState extends State<SecondScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
 
-                  FloatingActionButton(
+                  FloatingActionButton.small(
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).decrement();
                     },
