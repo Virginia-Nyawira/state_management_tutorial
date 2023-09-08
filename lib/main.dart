@@ -7,6 +7,7 @@ import 'package:states/Bloc/Presentation/bloc_home.dart';
 import 'package:states/Bloc/Presentation/internet_cubit.dart';
 import 'package:states/Bloc/Presentation/second_screen.dart';
 import 'package:states/Bloc/Service/counter_cubit.dart';
+import 'package:states/GetX/Presentation/getx_first_home.dart';
 import 'package:states/Provider/API_Call_using_Provider/Services/provider_service.dart';
 import 'package:states/Provider/API_Call_using_Provider/home_view.dart';
 import 'package:states/Provider/Model/items_model.dart';
@@ -20,16 +21,16 @@ import 'package:states/Provider/Views/home_view.dart';
 // }
 
 
-/// Provider with no API
-void main() {
-  runApp(
-    //Entry point of provider
-      ChangeNotifierProvider<MovieProvider>(
-          create: (context) => MovieProvider(),//creating change notifier object
-          child: const MyApp(),
-      )
-  );
-}
+/// Provider with no API--Movies
+// void main() {
+//   runApp(
+//     //Entry point of provider
+//       ChangeNotifierProvider<MovieProvider>(
+//           create: (context) => MovieProvider(),//creating change notifier object
+//           child: const MyApp(),
+//       )
+//   );
+// }
 
 ///Provider with API
 // void main() {
@@ -127,6 +128,33 @@ void main() {
 //   }
 // }
 
+
+///Provider Movie generator
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//           title: 'State management',
+//           theme: ThemeData(
+//             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+//             useMaterial3: true,
+//           ),
+//        home: const ProviderHomeView_Movie(),
+//     );
+//   }
+// }
+
+///GetX
+
+void main() {
+  runApp(
+      const MyApp()
+  );
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -134,12 +162,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-          title: 'State management',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-       home: const ProviderHomeView_Movie(),
+      title: 'State management-GetX',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const GetxFirstHome(),
     );
   }
 }
