@@ -23,17 +23,38 @@ class _GetxFirstHomeState extends State<GetxFirstHome> {
               onTap: (){
                 getXController.increaseX();
                 print(getXController.x);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: const Text("Incremented"),
+                  showCloseIcon: true,
+                  closeIconColor: Colors.white,
+                  duration: const Duration(milliseconds: 1000),
+                  backgroundColor: Colors.green[300],
+                ));
+              },
+              child: Container(
+                color: Colors.lime[300],
+                height: 100,
+                width: 100,
+                child: const Text('Tap tap!'),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                getXController.decreaseX();
+                print(getXController.x);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: const Text("Decremented"),
+                  showCloseIcon: true,
+                  closeIconColor: Colors.white,
+                  duration: const Duration(milliseconds: 1000),
+                  backgroundColor: Colors.green[800],
+                ));
               },
               child: const Card(
                 child: Text('Tap tap!'),
               ),
             ),
-            GestureDetector(
-              onTap: (){},
-              child: const Card(
-                child: Text('Tap tap!'),
-              ),
-            ),
+            Text(getXController.x.toString()),
           ],
         ),
       ),
