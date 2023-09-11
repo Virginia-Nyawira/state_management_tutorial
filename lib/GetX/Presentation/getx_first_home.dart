@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:states/GetX/Controller/getx_controller.dart';
+import 'package:states/GetX/Presentation/new_page.dart';
 
 class GetxFirstHome extends StatefulWidget {
   const GetxFirstHome({super.key});
@@ -48,11 +49,13 @@ class _GetxFirstHomeState extends State<GetxFirstHome> {
             ),
             GestureDetector(
               onTap: (){
+                Get.to(()=> const NewPage());
+
                 tapController.increaseX();
                // debugPrint(tapController.x);
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: const Text("Incremented"),
+                     content: const Text("Incremented"),
                     showCloseIcon: true,
                     closeIconColor: Colors.white,
                     duration: const Duration(milliseconds: 1000),
@@ -64,7 +67,7 @@ class _GetxFirstHomeState extends State<GetxFirstHome> {
                 color: Colors.lime[300],
                 height: 100,
                 width: 100,
-                child: const Text('Tap tap!'),
+                child: const Text('Go to first Page'),
               ),
             ),
 
