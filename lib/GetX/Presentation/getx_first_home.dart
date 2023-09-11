@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:states/GetX/Controller/getx_controller.dart';
 
 class GetxFirstHome extends StatefulWidget {
@@ -9,7 +10,8 @@ class GetxFirstHome extends StatefulWidget {
 }
 
 class _GetxFirstHomeState extends State<GetxFirstHome> {
-  GetXController getXController= GetXController();
+  //Initializing an instance of a class- Dependency injection
+  TapController tapController= Get.put(TapController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,10 +21,13 @@ class _GetxFirstHomeState extends State<GetxFirstHome> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            GetBuilder(builder: (builder){
+              return Text(tapController.x);
+            }),
             GestureDetector(
               onTap: (){
-                getXController.increaseX();
-                print(getXController.x);
+                tapController.increaseX();
+                debugPrint(tapController.x);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: const Text("Incremented"),
                   showCloseIcon: true,
@@ -40,8 +45,8 @@ class _GetxFirstHomeState extends State<GetxFirstHome> {
             ),
             GestureDetector(
               onTap: (){
-                getXController.decreaseX();
-                print(getXController.x);
+                tapController.decreaseX();
+                debugPrint(tapController.x);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: const Text("Decremented"),
                   showCloseIcon: true,
@@ -54,7 +59,7 @@ class _GetxFirstHomeState extends State<GetxFirstHome> {
                 child: Text('Tap tap!'),
               ),
             ),
-            Text(getXController.x.toString()),
+
           ],
         ),
       ),
