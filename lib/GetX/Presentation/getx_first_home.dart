@@ -70,6 +70,7 @@ class _GetxFirstHomeState extends State<GetxFirstHome> {
                 child: const Text('Go to first Page'),
               ),
             ),
+            const SizedBox(height: 10,),
 
             GestureDetector(
               onTap: (){
@@ -83,7 +84,9 @@ class _GetxFirstHomeState extends State<GetxFirstHome> {
                   backgroundColor: Colors.green[800],
                 ));
               },
-              child: const Card(
+              child: Container(
+                color: Colors.blueAccent,
+                width: 60,
                 child: Text('Tap tap!'),
               ),
             ),
