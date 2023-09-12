@@ -53,8 +53,8 @@ class _SimpleHomeState extends State<SimpleHome> {
       // Perform save operation here
       final List<MyActivities> myActivityList = [];
       String activity = _activityEditingController.text;
-      int date = _dateEditingController.text as int;
-      int time = _timeEditingController.text as int;
+      var date = double.parse(_dateEditingController.text);
+      num time = double.parse(_timeEditingController.text);
 
       MyActivities newActivity = MyActivities(
         activity: activity,
@@ -62,6 +62,7 @@ class _SimpleHomeState extends State<SimpleHome> {
         time: time,
       );
       myActivityList.add(newActivity);
+       simpleControllerLogic.addToDo(newActivity);
 
       // Print the values for demonstration
       print('Activity: $activity');

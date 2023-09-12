@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:states/GetX/Presentation/simple/simple_controller/done_activities.dart';
 import 'package:states/GetX/Presentation/simple/simple_controller/logic.dart';
 import 'package:states/GetX/Presentation/simple/simple_prjt.dart';
 
@@ -19,6 +20,14 @@ class _ViewActivitiesState extends State<ViewActivities> {
       appBar: AppBar(
         title: Text('My Activities',
           style: titleStyle(),),
+        actions: [
+          TextButton(onPressed: (){
+            //Go to finished tasks
+            Get.to(()=> const ViewDone());
+
+          },
+              child: const Text("View Done"))
+        ],
       ),
       body: controllerLogic.myActivities.isEmpty
           ? const Center(
@@ -39,25 +48,31 @@ class _ViewActivitiesState extends State<ViewActivities> {
                     fontSize: 17.0,
                   ),
                 ),
-                title:Text(controllerLogic.myActivities[index].date as String ,
+                title:Text(controllerLogic.myActivities[index].date.toString(),
                   style: labelStyle().copyWith(
                     fontSize: 17.0,
                   ),
                 ),
-                subtitle: Text(controllerLogic.myActivities[index].time as String,
+                subtitle: Text(controllerLogic.myActivities[index].time.toString(),
                   style: labelStyle().copyWith(
                     fontSize: 17.0,
                   ),
                 ),
                 trailing: IconButton(
                   onPressed: () {
+                    if (controllerLogic.myActivities.contains(done)) {
+                      //add to done list
+                      controllerLogic.doneActivities.add(done);
+                     print('Added');
+                     print(done);
+                    }
 
                   },
                   icon: Icon(
-                    Icons.favorite,
-                    // color: myList.contains(currentMovie)
-                    //     ? Colors.pink[400]
-                    //     : Colors.white,
+                    Icons.check_box,
+                    color: controllerLogic.myActivities.contains(done)
+                        ? Colors.pink[400]
+                        : Colors.white,
                   ),
                 )
               );
