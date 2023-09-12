@@ -12,7 +12,9 @@ class GetxFirstHome extends StatefulWidget {
 
 class _GetxFirstHomeState extends State<GetxFirstHome> {
   //Initializing an instance of a class- Dependency injection
-  TapController tapController= Get.put(TapController());
+  //TapController tapController= Get.put(TapController());
+  TapController tapController =Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

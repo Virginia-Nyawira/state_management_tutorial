@@ -187,7 +187,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      initialBinding: InitDep(),
       debugShowCheckedModeBanner: false,
       title: 'State management-GetX',
       theme: ThemeData(

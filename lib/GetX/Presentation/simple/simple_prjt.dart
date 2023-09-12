@@ -1,12 +1,15 @@
 ///Simple ToDo app implementing GetX state management
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:states/GetX/Presentation/simple/simple_controller/logic.dart';
 
 //title style
 TextStyle titleStyle(){
   return const TextStyle(
     fontSize: 18,
     color: Colors.black54,
+    fontWeight: FontWeight.w900,
     wordSpacing: 2,
   );
 }
@@ -28,6 +31,9 @@ class SimpleHome extends StatefulWidget {
 }
 
 class _SimpleHomeState extends State<SimpleHome> {
+
+  SimpleControllerLogic simpleControllerLogic= Get.find();
+
   TextEditingController _activityEditingController = TextEditingController();
   TextEditingController _dateEditingController = TextEditingController();
   TextEditingController _timeEditingController = TextEditingController();
@@ -58,7 +64,8 @@ class _SimpleHomeState extends State<SimpleHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text("My to dos", style:  titleStyle(),),
+        centerTitle: true,
+        title:  Text("My To Do-s", style:  titleStyle(),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -75,6 +82,9 @@ class _SimpleHomeState extends State<SimpleHome> {
               validator: (value){
                 if(value==null || value.isEmpty){
                   return "Activity required!";
+
+                }else{
+                  simpleControllerLogic.addActivity(_activityEditingController.text);
                 }
                 return null;
               },
@@ -89,6 +99,8 @@ class _SimpleHomeState extends State<SimpleHome> {
               validator: (value){
                 if(value==null || value.isEmpty){
                   return "Date required!";
+                }else{
+                  simpleControllerLogic.addDate(_dateEditingController.text);
                 }
                 return null;
               },
@@ -103,6 +115,8 @@ class _SimpleHomeState extends State<SimpleHome> {
               validator: (value){
                 if(value==null || value.isEmpty){
                   return "Time required!";
+                }else{
+                  simpleControllerLogic.addTime(_timeEditingController.text);
                 }
                 return null;
               },
