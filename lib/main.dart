@@ -9,6 +9,7 @@ import 'package:states/Bloc/Presentation/internet_cubit.dart';
 import 'package:states/Bloc/Presentation/second_screen.dart';
 import 'package:states/Bloc/Service/counter_cubit.dart';
 import 'package:states/GetX/Presentation/getx_first_home.dart';
+import 'package:states/GetX/Presentation/simple/simple_prjt.dart';
 import 'package:states/GetX/helper.dart';
 import 'package:states/Provider/API_Call_using_Provider/Services/provider_service.dart';
 import 'package:states/Provider/API_Call_using_Provider/home_view.dart';
@@ -149,7 +150,31 @@ import 'package:states/Provider/Views/home_view.dart';
 //   }
 // }
 
-///GetX
+///GetX Learning example
+
+// void main() {
+//   runApp(
+//       const MyApp()
+//   );
+// }
+//
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       initialBinding: InitDep(),
+//       debugShowCheckedModeBanner: false,
+//       title: 'State management-GetX',
+//       theme: ThemeData(
+//         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+//         useMaterial3: true,
+//       ),
+//       home: const GetxFirstHome(),
+//     );
+//   }
+// }
 
 void main() {
   runApp(
@@ -162,15 +187,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialBinding: InitDep(),
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'State management-GetX',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const GetxFirstHome(),
+      home: const SimpleHome(),
     );
   }
 }
+
