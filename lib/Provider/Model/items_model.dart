@@ -17,6 +17,7 @@ duration: "${Random().nextInt(100)+ 60} minutes"
 )
 );
 
+
 class MovieProvider with ChangeNotifier {
   final List<Movie> _movies= initialData;
   List<Movie> get movies => _movies;

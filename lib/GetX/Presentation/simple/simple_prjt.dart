@@ -51,9 +51,17 @@ class _SimpleHomeState extends State<SimpleHome> {
   void _saveForm() {
     if (_formKey.currentState!.validate()) {
       // Perform save operation here
+      final List<MyActivities> myActivityList = [];
       String activity = _activityEditingController.text;
-      String date = _dateEditingController.text;
-      String time = _timeEditingController.text;
+      int date = _dateEditingController.text as int;
+      int time = _timeEditingController.text as int;
+
+      MyActivities newActivity = MyActivities(
+        activity: activity,
+        date: date,
+        time: time,
+      );
+      myActivityList.add(newActivity);
 
       // Print the values for demonstration
       print('Activity: $activity');
@@ -93,10 +101,11 @@ class _SimpleHomeState extends State<SimpleHome> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Activity required!";
-                      } else {
-                        simpleControllerLogic
-                            .addActivity(_activityEditingController.text);
                       }
+                      // else {
+                      //   simpleControllerLogic
+                      //       .addActivity(_activityEditingController.text);
+                      // }
                       return null;
                     },
                   ),
@@ -110,10 +119,11 @@ class _SimpleHomeState extends State<SimpleHome> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Date required!";
-                      } else {
-                        simpleControllerLogic
-                            .addDate(_dateEditingController.text);
                       }
+                      // else {
+                      //   simpleControllerLogic
+                      //       .addDate(_dateEditingController.text);
+                      // }
                       return null;
                     },
                   ),
@@ -127,9 +137,6 @@ class _SimpleHomeState extends State<SimpleHome> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Time required!";
-                      } else {
-                        simpleControllerLogic
-                            .addTime(_timeEditingController.text);
                       }
                       return null;
                     },
@@ -143,7 +150,7 @@ class _SimpleHomeState extends State<SimpleHome> {
                   const SizedBox(height: 16.0),
                   ElevatedButton(
                       onPressed: () {
-                       Get.to(()=>const ViewActivities());
+                        Get.to(() => const ViewActivities());
                       },
                       child: const Text("See My activites")),
                 ],
