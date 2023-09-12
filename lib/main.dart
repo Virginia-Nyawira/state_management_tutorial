@@ -9,6 +9,7 @@ import 'package:states/Bloc/Presentation/internet_cubit.dart';
 import 'package:states/Bloc/Presentation/second_screen.dart';
 import 'package:states/Bloc/Service/counter_cubit.dart';
 import 'package:states/GetX/Presentation/getx_first_home.dart';
+import 'package:states/GetX/helper.dart';
 import 'package:states/Provider/API_Call_using_Provider/Services/provider_service.dart';
 import 'package:states/Provider/API_Call_using_Provider/home_view.dart';
 import 'package:states/Provider/Model/items_model.dart';
@@ -162,6 +163,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: InitDep(),
       debugShowCheckedModeBanner: false,
       title: 'State management-GetX',
       theme: ThemeData(

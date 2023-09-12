@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:states/GetX/Controller/getx_controller.dart';
+import 'package:states/GetX/Presentation/third_page.dart';
 class NewPage extends StatelessWidget {
   const NewPage({super.key});
 
@@ -28,7 +29,7 @@ class NewPage extends StatelessWidget {
               ),
             ),
           ),
-          Text(tapController.x.toString()),
+          //Text(tapController.x.toString()),
           GetBuilder<TapController>(builder: (_)=>
               GestureDetector(
                 onTap: (){
@@ -39,7 +40,11 @@ class NewPage extends StatelessWidget {
                   color: Colors.orange,
                   child: Text(tapController.x.toString()),
                 ),
-              ))
+              )),
+          TextButton(onPressed: (){
+            Get.to(()=>const ThirdPage());
+          },
+              child: const Text('Go to 3'))
         ],
       ),
     );
