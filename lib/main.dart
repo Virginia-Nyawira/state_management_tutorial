@@ -213,8 +213,12 @@ void main() {
           child: MyApp())
   );
 }
-/// 1. RiverPod Provider
-final nameProvider = Provider((ref)=>'Riverpod here');
+///  RiverPod
+/// 1. Provider- only reads values, does not support changing from elsewhere
+/// 2. StateProvider - value can be changed, it is nullable
+final nameProvider = Provider((ref)=>'Learning TimeS');
+
+final myName = StateProvider<String?>((ref) => null);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -228,7 +232,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RiverHome(),
+      home: const RiverHomeTwo(),
     );
   }
 }
