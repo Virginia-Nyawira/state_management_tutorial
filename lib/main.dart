@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';  --can't be imported with Riverpod
 import 'package:states/Bloc/Presentation/Routing/router.dart';
 import 'package:states/Bloc/Presentation/bloc_home.dart';
 import 'package:states/Bloc/Presentation/internet_cubit.dart';
@@ -16,6 +16,9 @@ import 'package:states/Provider/API_Call_using_Provider/home_view.dart';
 import 'package:states/Provider/Model/items_model.dart';
 import 'package:states/Provider/Views/home_view.dart';
 //import 'package:states/Provider/provider_home.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'Riverpod/Learning/river_home.dart';
 
 // void main() {
 //   runApp(
@@ -176,26 +179,56 @@ import 'package:states/Provider/Views/home_view.dart';
 //   }
 // }
 
+
+///GetX to do app project
+// void main() {
+//   runApp(
+//       const MyApp()
+//   );
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       initialBinding: InitDep(),
+//       debugShowCheckedModeBanner: false,
+//       title: 'State management-GetX',
+//       theme: ThemeData(
+//         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+//         useMaterial3: true,
+//       ),
+//       home: const SimpleHome(),
+//     );
+//   }
+// }
+
+///Riverpod Learning
+///
 void main() {
   runApp(
-      const MyApp()
+      const ProviderScope(
+          child: MyApp())
   );
 }
+/// 1. RiverPod Provider
+final nameProvider = Provider((ref)=>'Riverpod here');
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialBinding: InitDep(),
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'State management-GetX',
+      title: 'State management-RiverPod',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SimpleHome(),
+      home: const RiverHome(),
     );
   }
 }

@@ -18,7 +18,7 @@ class ViewDone extends StatelessWidget {
         actions: [
           TextButton(onPressed: (){
             //Go to finished tasks
-            Get.back();
+            Get.to(()=>const SimpleHome());
           },
               child: const Text("Exit"))
         ],
@@ -34,7 +34,6 @@ class ViewDone extends StatelessWidget {
         child: ListView.builder(
             itemCount: controllerLogic.doneActivities.length,
             itemBuilder: (context,index){
-              final done= controllerLogic.doneActivities[index];
               return ListTile(
                 leading: Text(controllerLogic.doneActivities[index].activity,
                   style: labelStyle().copyWith(
