@@ -45,6 +45,7 @@ class _SimpleHomeState extends State<SimpleHome> {
     _activityEditingController.dispose();
     _timeEditingController.dispose();
     _dateEditingController.dispose();
+    Get.delete<SimpleControllerLogic>();
     super.dispose();
   }
 
@@ -158,4 +159,5 @@ class _SimpleHomeState extends State<SimpleHome> {
               )),
         ));
   }
+
 }

@@ -12,13 +12,13 @@ class ViewDone extends StatelessWidget {
   Widget build(BuildContext context) {
     SimpleControllerLogic controllerLogic = Get.find();
     return Scaffold(
-     appBar: AppBar(
+      appBar: AppBar(
         title: Text('My Done Activities',
           style: titleStyle(),),
         actions: [
           TextButton(onPressed: (){
             //Go to finished tasks
-           Get.back();
+            Get.back();
           },
               child: const Text("Exit"))
         ],
@@ -36,38 +36,38 @@ class ViewDone extends StatelessWidget {
             itemBuilder: (context,index){
               final done= controllerLogic.doneActivities[index];
               return ListTile(
-                  leading: Text(controllerLogic.doneActivities[index].activity,
-                    style: labelStyle().copyWith(
-                      fontSize: 17.0,
-                    ),
+                leading: Text(controllerLogic.doneActivities[index].activity,
+                  style: labelStyle().copyWith(
+                    fontSize: 17.0,
                   ),
-                  title:Text(controllerLogic.doneActivities[index].date.toString(),
-                    style: labelStyle().copyWith(
-                      fontSize: 17.0,
-                    ),
+                ),
+                title:Text(controllerLogic.doneActivities[index].date.toString(),
+                  style: labelStyle().copyWith(
+                    fontSize: 17.0,
                   ),
-                  trailing: Text(controllerLogic.doneActivities[index].time.toString(),
-                    style: labelStyle().copyWith(
-                      fontSize: 17.0,
-                    ),
+                ),
+                trailing: Text(controllerLogic.doneActivities[index].time.toString(),
+                  style: labelStyle().copyWith(
+                    fontSize: 17.0,
                   ),
-                  // trailing: IconButton(
-                  //   onPressed: () {
-                  //     if (controllerLogic.doneActivities.contains(done)) {
-                  //       //add to done list
-                  //       controllerLogic.doneActivities.add(done);
-                  //       print('Added');
-                  //       print(done);
-                  //     }
-                  //
-                  //   },
-                  //   icon: Icon(
-                  //     Icons.favorite,
-                  //     color: controllerLogic.myActivities.contains(done)
-                  //         ? Colors.pink[400]
-                  //         : Colors.white,
-                  //   ),
-                  // )
+                ),
+                // trailing: IconButton(
+                //   onPressed: () {
+                //     if (controllerLogic.doneActivities.contains(done)) {
+                //       //add to done list
+                //       controllerLogic.doneActivities.add(done);
+                //       print('Added');
+                //       print(done);
+                //     }
+                //
+                //   },
+                //   icon: Icon(
+                //     Icons.favorite,
+                //     color: controllerLogic.myActivities.contains(done)
+                //         ? Colors.pink[400]
+                //         : Colors.white,
+                //   ),
+                // )
               );
 
             }
@@ -77,3 +77,4 @@ class ViewDone extends StatelessWidget {
     );
   }
 }
+
