@@ -19,7 +19,9 @@ import 'package:states/Provider/Views/home_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:states/Riverpod/Learning/Model/user_model.dart';
 
+import 'Riverpod/Learning/Model/f_user_model.dart';
 import 'Riverpod/Learning/river_home.dart';
+import 'package:http/http.dart' as http;
 
 // void main() {
 //   runApp(
@@ -230,6 +232,13 @@ final jinaProvider = StateNotifierProvider<RivUserNotifier, RivUser>((ref) => Ri
         name: '',
         age: 0)
 )
+);
+
+final futureTodoProvider = FutureProvider((ref) {
+  const url= 'https://dummyjson.com/todos';
+  return http.get(Uri.parse(url)).then((value) => FuUser.fromJson(value.body as Map<String, dynamic>));
+}
+
 );
 
 class MyApp extends StatelessWidget {

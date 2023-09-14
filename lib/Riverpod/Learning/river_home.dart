@@ -173,11 +173,16 @@ class _RivStateNotifierProviderState
 
 ///Future Provider Implimentation class
 
-class RivFutureProvider extends StatelessWidget {
+class RivFutureProvider extends ConsumerStatefulWidget {
   const RivFutureProvider({super.key});
+ 
+  @override
+  ConsumerState createState() => _RivFutureProviderState();
+}
 
+class _RivFutureProviderState extends ConsumerState<RivFutureProvider> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container();
   }
 }
