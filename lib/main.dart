@@ -22,7 +22,7 @@ import 'package:states/Riverpod/Learning/Model/user_model.dart';
 import 'Riverpod/Learning/Model/f_user_model.dart';
 import 'Riverpod/Learning/river_home.dart';
 import 'package:http/http.dart' as http;
-
+import 'dart:convert';
 // void main() {
 //   runApp(
 //       const MyApp()
@@ -234,12 +234,24 @@ final jinaProvider = StateNotifierProvider<RivUserNotifier, RivUser>((ref) => Ri
 )
 );
 
-final futureTodoProvider = FutureProvider((ref) {
-  const url= 'https://dummyjson.com/todos';
-  return http.get(Uri.parse(url)).then((value) => FuUser.fromJson(value.body as Map<String, dynamic>));
-}
+// final futureTodoProvider = FutureProvider((ref) {
+//   const url= 'https://dummyjson.com/todos';
+//
+//   return http.get(Uri.parse(url)).then((value) => FuUser.fromJson(value.body);
+// }
+// );
 
-);
+final futureTodoProvider = FutureProvider<FuUser>((ref) async {
+  const url = 'https://dummyjson.com/todos';
+  final response = await http.get(Uri.parse(url));
+
+  if (response.statusCode == 200) {
+    final data = json.decode(response.body);
+    return FuUser.fromJson(data);
+  } else {
+    throw Exception('Failed to load data');
+  }
+});
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -253,7 +265,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RivStateNotifierProvider(),
+      home: const RivFutureProvider(),
     );
   }
 }

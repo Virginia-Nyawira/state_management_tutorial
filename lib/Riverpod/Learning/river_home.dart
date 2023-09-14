@@ -86,10 +86,8 @@ class _RivStateNotifierProviderState
   void _onSubmitForm() {
     //Update user details
     if (_formKey.currentState!.validate()) {
-
       //Update User Values
-      ref.read(jinaProvider.notifier).updateUser(
-          RivUser(
+      ref.read(jinaProvider.notifier).updateUser(RivUser(
             name: _nameController.text,
             age: int.parse(_ageController.text),
           ));
@@ -144,7 +142,7 @@ class _RivStateNotifierProviderState
                   TextFormField(
                     controller: _ageController,
                     validator: (value) {
-                      if ( value!.isEmpty) {
+                      if (value!.isEmpty) {
                         return "Required";
                       } else {
                         return null;
@@ -159,10 +157,11 @@ class _RivStateNotifierProviderState
                         _onSubmitForm();
                       },
                       child: const Text('Done')),
-                  const Divider(thickness: 10,),
+                  const Divider(
+                    thickness: 10,
+                  ),
                   Text(jina.name),
                   Text(jina.age.toString()),
-
                 ],
               ))
         ],
@@ -175,7 +174,7 @@ class _RivStateNotifierProviderState
 
 class RivFutureProvider extends ConsumerStatefulWidget {
   const RivFutureProvider({super.key});
- 
+
   @override
   ConsumerState createState() => _RivFutureProviderState();
 }
@@ -183,6 +182,23 @@ class RivFutureProvider extends ConsumerStatefulWidget {
 class _RivFutureProviderState extends ConsumerState<RivFutureProvider> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final userTodo = ref.watch(futureTodoProvider);
+   return userTodo.when(data: (data) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Container(
+          color: Colors.grey,
+        ),
+      );
+    }, error: (error, stackTrace) {
+      return Center(
+        child: Text(error.toString()),
+      );
+    }, loading: () {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    });
+
   }
 }
