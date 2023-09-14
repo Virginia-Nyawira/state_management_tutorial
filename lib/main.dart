@@ -17,6 +17,7 @@ import 'package:states/Provider/Model/items_model.dart';
 import 'package:states/Provider/Views/home_view.dart';
 //import 'package:states/Provider/provider_home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:states/Riverpod/Learning/Model/user_model.dart';
 
 import 'Riverpod/Learning/river_home.dart';
 
@@ -216,9 +217,18 @@ void main() {
 ///  RiverPod
 /// 1. Provider- only reads values, does not support changing from elsewhere
 /// 2. StateProvider - value can be changed, it is nullable
-final nameProvider = Provider((ref)=>'Learning TimeS');
+/// 3. StateNotifier & StateNotifier provider
 
-final myName = StateProvider<String?>((ref) => null);
+final nameProvider = Provider((ref)=>'Learning TimeS'); // 1.
+
+final myName = StateProvider<String?>((ref) => null); // 2.
+
+final jinaProvider = StateNotifierProvider<RivUserNotifier, RivUser>((ref) => RivUserNotifier(    // 3.
+    const RivUser(
+        name: 'name',
+        age: 0)
+)
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

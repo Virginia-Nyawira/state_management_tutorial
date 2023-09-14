@@ -34,10 +34,14 @@ class RiverHomeTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    void onSubmit(WidgetRef ref,String value){
+      ref.read(myName.notifier).update((state) => value);
+    }
     return Consumer(
       builder: (context,ref, child) {
         final title = ref.watch(nameProvider);
         final name= ref.watch(myName)?? '';
+
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -45,9 +49,39 @@ class RiverHomeTwo extends StatelessWidget {
           ),
           body: Container(
             color: Colors.grey,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 70,
+                ),
+                TextField(
+                  onSubmitted: (value){
+                    onSubmit(ref,value);
+                  },
+                )
+              ],
+            ),
           ),
         );
       }
+    );
+  }
+}
+class RivHomewithStateNotifierProv extends ConsumerWidget {
+  const RivHomewithStateNotifierProv({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final jina = ref.watch(jinaProvider);
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+        ],
+      ),
     );
   }
 }
