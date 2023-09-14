@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:states/Riverpod/Learning/Model/user_model.dart';
 import 'package:states/main.dart';
 
 ///Method one -->a class extends ConsumerWidget that contains WidgetRef & the method ref,watch()
@@ -67,6 +68,7 @@ class RiverHomeTwo extends StatelessWidget {
   }
 }
 
+///StateNotifier with StateNotifierProvider
 
 class RivStateNotifierProvider extends ConsumerStatefulWidget {
   const RivStateNotifierProvider({super.key});
@@ -75,18 +77,33 @@ class RivStateNotifierProvider extends ConsumerStatefulWidget {
   ConsumerState createState() => _RivStateNotifierProviderState();
 }
 
-class _RivStateNotifierProviderState extends ConsumerState<RivStateNotifierProvider> {
+class _RivStateNotifierProviderState
+    extends ConsumerState<RivStateNotifierProvider> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _ageController = TextEditingController();
 
   void _onSubmitForm() {
     //Update user details
+    if (_formKey.currentState!.validate()) {
 
+      //Update User Values
+      ref.read(jinaProvider.notifier).updateUser(
+          RivUser(
+            name: _nameController.text,
+            age: int.parse(_ageController.text),
+          ));
+
+      //Clear text controllers
+      _nameController.clear();
+      _ageController.clear();
+    }
   }
+
   void onSubmit(WidgetRef ref, String value) {
     ref.read(jinaProvider.notifier).updateName(value);
   }
+
   @override
   Widget build(BuildContext context) {
     final jina = ref.watch(jinaProvider);
@@ -95,8 +112,8 @@ class _RivStateNotifierProviderState extends ConsumerState<RivStateNotifierProvi
         centerTitle: true,
         title: Text(jina.name),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+        shrinkWrap: true,
         children: [
           const SizedBox(
             height: 20,
@@ -116,8 +133,8 @@ class _RivStateNotifierProviderState extends ConsumerState<RivStateNotifierProvi
                     decoration: const InputDecoration(
                       labelText: 'Name',
                     ),
-                    validator: (value){
-                      if (value==null) {
+                    validator: (value) {
+                      if (value!.isEmpty) {
                         return "Required";
                       } else {
                         return null;
@@ -126,8 +143,8 @@ class _RivStateNotifierProviderState extends ConsumerState<RivStateNotifierProvi
                   ),
                   TextFormField(
                     controller: _ageController,
-                    validator: (value){
-                      if (value==null) {
+                    validator: (value) {
+                      if ( value!.isEmpty) {
                         return "Required";
                       } else {
                         return null;
@@ -141,7 +158,10 @@ class _RivStateNotifierProviderState extends ConsumerState<RivStateNotifierProvi
                       onPressed: () {
                         _onSubmitForm();
                       },
-                      child: const Text('Done'))
+                      child: const Text('Done')),
+                  const Divider(thickness: 10,),
+                  Text(jina.name),
+                  Text(jina.age.toString()),
 
                 ],
               ))
