@@ -74,4 +74,9 @@ class RivUserNotifier extends StateNotifier<RivUser> {
   void updateName(String jina){
     state= state.copyWith(name: jina);
   }
+  void updateUser(RivUser rivUser){
+    state= state.copyWith(
+        name: rivUser.name,
+        age: rivUser.age);
+  }
 }

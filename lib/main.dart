@@ -218,6 +218,8 @@ void main() {
 /// 1. Provider- only reads values, does not support changing from elsewhere
 /// 2. StateProvider - value can be changed, it is nullable
 /// 3. StateNotifier & StateNotifier provider
+/// 4.
+/// 5. FutureProvider = http calls
 
 final nameProvider = Provider((ref)=>'Learning TimeS'); // 1.
 
@@ -225,7 +227,7 @@ final myName = StateProvider<String?>((ref) => null); // 2.
 
 final jinaProvider = StateNotifierProvider<RivUserNotifier, RivUser>((ref) => RivUserNotifier(    // 3.
     const RivUser(
-        name: 'name',
+        name: '',
         age: 0)
 )
 );
@@ -242,7 +244,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RiverHomeTwo(),
+      home: const RivStateNotifierProvider(),
     );
   }
 }
