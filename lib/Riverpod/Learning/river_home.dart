@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:states/Riverpod/Learning/Model/f_user_model.dart';
 import 'package:states/Riverpod/Learning/Model/user_model.dart';
 import 'package:states/main.dart';
 
@@ -180,17 +181,33 @@ class RivFutureProvider extends ConsumerStatefulWidget {
 }
 
 class _RivFutureProviderState extends ConsumerState<RivFutureProvider> {
+
+  bool isLoaded =false;
   @override
   Widget build(BuildContext context) {
     final userTodo = ref.watch(futureTodoProvider);
-   return userTodo.when(data: (data) {
-      return Scaffold(
-        appBar: AppBar(),
-        body: Container(
-          color: Colors.grey,
-        ),
-      );
-    }, error: (error, stackTrace) {
+    return userTodo.when(
+        data: (data) {
+          return Scaffold(
+            body: Visibility(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Set the number of cards in each row
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                ),
+                itemCount: data.todos.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.all(10),
+                    elevation: 10,
+                    child: Text(data.todos[index].todo),
+                  );
+                },
+              ),
+            ),
+          );
+        }, error: (error, stackTrace) {
       return Center(
         child: Text(error.toString()),
       );
