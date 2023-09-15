@@ -20,7 +20,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:states/Riverpod/Learning/Model/user_model.dart';
 
 import 'Riverpod/Learning/Model/f_user_model.dart';
-import 'Riverpod/Learning/river_home.dart';
+import 'Riverpod/Learning/Presentation/future_provider.dart';
+import 'Riverpod/Learning/Presentation/riverpod_provider_home.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 // void main() {
