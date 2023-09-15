@@ -237,10 +237,16 @@ final jinaProvider = StateNotifierProvider<RivUserNotifier, RivUser>((ref) => Ri
 
 /// 4. FutureProvider = http calls
 //Applying Provider ref
-final futureTodoProvider = FutureProvider<FuUser>((ref) async {
+final futureTodoProvider = FutureProvider((ref) async {
   final userRepository= ref.watch(userRepositoryProvider);
   return userRepository.fetchToDo();
 });
+
+// /// .family class in FutureProvider
+// final futureTodoProvider = FutureProvider.family((ref, String idInput){
+//   final userRepository= ref.watch(userRepositoryProvider);
+//   return userRepository.fetchToDo(idInput);
+// });
 
 /// 5. StreamProvider
 final streamProvider = StreamProvider((ref) async* {
@@ -259,7 +265,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RiverPodStream(),
+      home: const RivFutureProvider(),
     );
   }
 }

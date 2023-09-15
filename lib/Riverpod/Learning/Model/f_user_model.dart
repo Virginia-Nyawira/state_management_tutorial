@@ -66,9 +66,24 @@ class Todo {
       };
 }
 
+// class UserRepository {
+//   Future<FuUser> fetchToDo() async {
+//     const url = 'https://dummyjson.com/todos';
+//     final response = await http.get(Uri.parse(url));
+//
+//     if (response.statusCode == 200) {
+//       final data = json.decode(response.body);
+//       return FuUser.fromJson(data);
+//     } else {
+//       throw Exception('Failed to load data');
+//     }
+//   }
+// }
+// final userRepositoryProvider = Provider((ref) => UserRepository());
+
 class UserRepository {
   Future<FuUser> fetchToDo() async {
-    const url = 'https://dummyjson.com/todos';
+    var url = 'https://dummyjson.com/todos';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
