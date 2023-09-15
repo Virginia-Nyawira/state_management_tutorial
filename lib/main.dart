@@ -222,6 +222,7 @@ void main() {
 /// 3. StateNotifier & StateNotifier provider
 /// 4.
 /// 5. FutureProvider = http calls
+/// 6. StreamProvider
 
 final nameProvider = Provider((ref)=>'Learning TimeS'); // 1.
 
@@ -234,23 +235,10 @@ final jinaProvider = StateNotifierProvider<RivUserNotifier, RivUser>((ref) => Ri
 )
 );
 
-// final futureTodoProvider = FutureProvider((ref) {
-//   const url= 'https://dummyjson.com/todos';
-//
-//   return http.get(Uri.parse(url)).then((value) => FuUser.fromJson(value.body);
-// }
-// );
-
+//Applying Provider ref
 final futureTodoProvider = FutureProvider<FuUser>((ref) async {
-  const url = 'https://dummyjson.com/todos';
-  final response = await http.get(Uri.parse(url));
-
-  if (response.statusCode == 200) {
-    final data = json.decode(response.body);
-    return FuUser.fromJson(data);
-  } else {
-    throw Exception('Failed to load data');
-  }
+  final userRepository= ref.watch(userRepositoryProvider);
+  return userRepository.fetchToDo();
 });
 
 class MyApp extends StatelessWidget {

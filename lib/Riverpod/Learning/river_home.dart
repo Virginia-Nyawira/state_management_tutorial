@@ -69,109 +69,8 @@ class RiverHomeTwo extends StatelessWidget {
   }
 }
 
-///StateNotifier with StateNotifierProvider
 
-class RivStateNotifierProvider extends ConsumerStatefulWidget {
-  const RivStateNotifierProvider({super.key});
-
-  @override
-  ConsumerState createState() => _RivStateNotifierProviderState();
-}
-
-class _RivStateNotifierProviderState
-    extends ConsumerState<RivStateNotifierProvider> {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _ageController = TextEditingController();
-
-  void _onSubmitForm() {
-    //Update user details
-    if (_formKey.currentState!.validate()) {
-      //Update User Values
-      ref.read(jinaProvider.notifier).updateUser(RivUser(
-            name: _nameController.text,
-            age: int.parse(_ageController.text),
-          ));
-
-      //Clear text controllers
-      _nameController.clear();
-      _ageController.clear();
-    }
-  }
-
-  void onSubmit(WidgetRef ref, String value) {
-    ref.read(jinaProvider.notifier).updateName(value);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final jina = ref.watch(jinaProvider);
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(jina.name),
-      ),
-      body: ListView(
-        shrinkWrap: true,
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Text(jina.age.toString()),
-          TextField(
-            onSubmitted: (value) {
-              onSubmit(ref, value);
-            },
-          ),
-          Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: const InputDecoration(
-                      labelText: 'Name',
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Required";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  TextFormField(
-                    controller: _ageController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Required";
-                      } else {
-                        return null;
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Age',
-                    ),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        _onSubmitForm();
-                      },
-                      child: const Text('Done')),
-                  const Divider(
-                    thickness: 10,
-                  ),
-                  Text(jina.name),
-                  Text(jina.age.toString()),
-                ],
-              ))
-        ],
-      ),
-    );
-  }
-}
-
-///Future Provider Implimentation class
+///Future Provider Implimentation
 
 class RivFutureProvider extends ConsumerStatefulWidget {
   const RivFutureProvider({super.key});
@@ -209,6 +108,7 @@ class _RivFutureProviderState extends ConsumerState<RivFutureProvider> {
                 margin: const EdgeInsets.all(10),
                 elevation: 10,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(data.todos[index].todo,
                     style: const TextStyle(
