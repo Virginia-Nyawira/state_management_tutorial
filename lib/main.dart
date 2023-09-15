@@ -24,6 +24,8 @@ import 'Riverpod/Learning/Presentation/future_provider.dart';
 import 'Riverpod/Learning/Presentation/riverpod_provider_home.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'Riverpod/Learning/Presentation/stream_provider.dart';
 // void main() {
 //   runApp(
 //       const MyApp()
@@ -218,17 +220,14 @@ void main() {
   );
 }
 ///  RiverPod
-/// 1. Provider- only reads values, does not support changing from elsewhere
-/// 2. StateProvider - value can be changed, it is nullable
-/// 3. StateNotifier & StateNotifier provider
-/// 4.
-/// 5. FutureProvider = http calls
-/// 6. StreamProvider
 
+/// 1. Provider- only reads values, does not support changing from elsewhere
 final nameProvider = Provider((ref)=>'Learning TimeS'); // 1.
 
+/// 2. StateProvider - value can be changed, it is nullable
 final myName = StateProvider<String?>((ref) => null); // 2.
 
+/// 3. StateNotifier & StateNotifier provider
 final jinaProvider = StateNotifierProvider<RivUserNotifier, RivUser>((ref) => RivUserNotifier(    // 3.
     const RivUser(
         name: '',
@@ -236,10 +235,16 @@ final jinaProvider = StateNotifierProvider<RivUserNotifier, RivUser>((ref) => Ri
 )
 );
 
+/// 4. FutureProvider = http calls
 //Applying Provider ref
 final futureTodoProvider = FutureProvider<FuUser>((ref) async {
   final userRepository= ref.watch(userRepositoryProvider);
   return userRepository.fetchToDo();
+});
+
+/// 5. StreamProvider
+final streamProvider = StreamProvider((ref) async* {
+  yield [1,2,3,4,5];
 });
 
 class MyApp extends StatelessWidget {
@@ -254,7 +259,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RivFutureProvider(),
+      home: const RiverPodStream(),
     );
   }
 }
