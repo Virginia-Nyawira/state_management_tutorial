@@ -242,7 +242,7 @@ final futureTodoProvider = FutureProvider((ref) async {
   return userRepository.fetchToDo();
 });
 
-// /// .family class in FutureProvider
+// /// .family class in FutureProvider - can be used when getting a single user record
 // final futureTodoProvider = FutureProvider.family((ref, String idInput){
 //   final userRepository= ref.watch(userRepositoryProvider);
 //   return userRepository.fetchToDo(idInput);
