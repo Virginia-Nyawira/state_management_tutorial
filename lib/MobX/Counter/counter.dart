@@ -1,8 +1,8 @@
 
-// Pending Implementation
+// Pending Implementation. Will comme back some other time later
 import 'package:mobx/mobx.dart';
 
-// Generated file
+// Generated file -- flutter pub run build_runner build
 // part 'counter.g.dart';
 //
 // class Counter = _Counter with _$Counter;
